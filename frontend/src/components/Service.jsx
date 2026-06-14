@@ -5,7 +5,7 @@ import { z } from 'zod';
 import axios from 'axios';
 import toast, { Toaster } from 'react-hot-toast';
 
-const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000';
+const API_URL = import.meta.env.VITE_API_URL || 'https://resturant-site-production.up.railway.app/api';
 
 const servicesData = [
   {

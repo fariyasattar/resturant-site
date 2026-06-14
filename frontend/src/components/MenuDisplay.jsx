@@ -19,7 +19,7 @@ import pastries from '../assets/pastries.jpg';
 import food from '../assets/food.png';
 
 // ─── Config ─────────────────────────────────
-const API_URL = 'http://localhost:5000/api';
+const API_URL = 'https://resturant-site-production.up.railway.app/api';
 
 const itemImages = {
   Biryani: biryani, Nihari: nihari, 'Chapli Kabab': chapliKabab,

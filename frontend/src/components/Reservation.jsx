@@ -48,7 +48,7 @@ const Reservation = () => {
 
       console.log('Backend ko ye ja raha hai:', dataToSend);
 
-      const res = await axios.post('http://localhost:5000/api/bookings', dataToSend);
+      const res = await axios.post('https://resturant-site-production.up.railway.app/api/bookings', dataToSend);
 
       setSubmitted(true);
       setTimeout(() => {
