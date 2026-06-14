@@ -50,10 +50,11 @@ function App() {
         <Route path="/" element={<HomePage />} />
 
         {/* Alag pages bhi chahiye to ye routes */}
+        <Route path="/service" element={<Service />} />
         <Route path="/about" element={<About />} />
         <Route path="/menu" element={<MenuDisplay />} />
         <Route path="/gallery" element={<Gallery />} />
-        <Route path="/service" element={<Service />} />
+        
         <Route path="/reservation" element={<Reservation />} />
         
       </Routes>
