@@ -14,7 +14,8 @@ const orderSchema = new mongoose.Schema({
     default: 'Pending' 
   },
   customerName: { type: String, default: 'Guest' },
-  createdAt: { type: Date, default: Date.now }
-});
+  phone: String,      // add kiya
+  address: String     // add kiya
+}, { timestamps: true }); // createdAt, updatedAt auto handle karega
 
 module.exports = mongoose.model('Order', orderSchema);
