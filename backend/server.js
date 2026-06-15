@@ -10,7 +10,7 @@ const app = express()
 // 1. Middleware
 app.use(cors({ 
   origin: "*",
-  credentials: true 
+  
 }))
 app.use(express.json())
 
