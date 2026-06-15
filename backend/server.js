@@ -8,7 +8,10 @@ const cartRoutes = require("./routes/cart.js")  // import ki jagah require
 const app = express()
 
 // 1. Middleware
-app.use(cors({ origin: '*' }))
+app.use(cors({ 
+  origin: "https://resturant-site-beryl.vercel.app",
+  credentials: true 
+}))
 app.use(express.json())
 
 // 2. MongoDB Connection

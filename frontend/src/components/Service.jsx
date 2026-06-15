@@ -4,8 +4,10 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 import axios from 'axios';
 import toast, { Toaster } from 'react-hot-toast';
+// Reservation.jsx me
+const API_URL = import.meta.env.VITE_API_URL || 'https://resturant-site-production.up.railway.app';
 
-const API_URL = import.meta.env.VITE_API_URL || 'https://resturant-site-production.up.railway.app/api';
+const res = await axios.post(`${API_URL}/api/bookings`, dataToSend);
 
 const servicesData = [
   {
