@@ -2,6 +2,9 @@ import React, { useState } from 'react';
 import { FiCalendar, FiClock, FiUsers, FiPhone, FiUser, FiCheck, FiX } from 'react-icons/fi';
 import axios from 'axios';
 
+// YE LINE ADD KI - Vercel ke liye API URL
+const API_URL = import.meta.env.VITE_API_URL || 'https://resturant-site-production.up.railway.app';
+
 const Reservation = () => {
   const [formData, setFormData] = useState({
     name: '',
@@ -41,14 +44,17 @@ const Reservation = () => {
         name: formData.name.trim(),
         phone: formData.phone.trim(),
         date: formData.date,
+        time: formData.time, // YE ADD KIYA - backend me time bhi jayega
         guests: parseInt(formData.guests),
+        occasion: formData.occasion, // YE ADD KIYA
         service: 'Dastarkhan Reservation',
         serviceId: 'dastarkhan-table-01'
       };
 
       console.log('Backend ko ye ja raha hai:', dataToSend);
 
-      const res = await axios.post('/api/bookings', dataToSend);
+      // YE LINE THEEK KI - /api ki jagah pura URL
+      const res = await axios.post(`${API_URL}/api/bookings`, dataToSend);
 
       setSubmitted(true);
       setTimeout(() => {
@@ -61,7 +67,7 @@ const Reservation = () => {
           guests: '2',
           occasion: 'Casual Dining'
         });
-      }, 4000); // 4 second baad reset
+      }, 4000);
 
     } catch (err) {
       console.error('Backend Error:', err.response?.data);
@@ -72,7 +78,7 @@ const Reservation = () => {
   return (
     <section className="bg-black py-20 px-4">
       <div className="max-w-7xl mx-auto">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-0 border border-gray-800 rounded-3xl overflow-hidden min-h-[650px]">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-0 border-gray-800 rounded-3xl overflow-hidden min-h-[650px]">
 
           {/* Left - Form */}
           <div className="bg-gray-900/30 p-8 md:p-12">
@@ -83,21 +89,19 @@ const Reservation = () => {
               </h2>
             </div>
 
-            {/* Error Message */}
             {error && (
-              <div className="bg-red-500/20 border border-red-500 text-red-400 px-4 py-3 rounded-xl mb-5 flex items-center gap-2 animate-pulse">
+              <div className="bg-red-500/20 border-red-500 text-red-400 px-4 py-3 rounded-xl mb-5 flex items-center gap-2 animate-pulse">
                 <FiX /> {error}
               </div>
             )}
 
-            {/* Success Message - YE NAYA ADD KIYA */}
             {submitted && (
-              <div className="bg-green-500/20 border border-green-500 text-green-400 px-4 py-4 rounded-xl mb-5 animate-pulse">
+              <div className="bg-green-500/20 border-green-500 text-green-400 px-4 py-4 rounded-xl mb-5 animate-pulse">
                 <div className="flex items-center gap-2 font-bold mb-1">
                   <FiCheck className="text-xl" /> Reservation Successful!
                 </div>
                 <p className="text-sm">
-                  Thank you,{formData.name}! Your table has been successfully reserved.
+                  Thank you, {formData.name}! Your table has been successfully reserved.
                   We will contact you shortly at {formData.phone} to confirm the details.
                 </p>
               </div>
@@ -114,7 +118,7 @@ const Reservation = () => {
                     value={formData.name}
                     onChange={handleChange}
                     disabled={submitted}
-                    className="w-full bg-black border border-gray-800 rounded-xl pl-12 pr-4 py-4 text-white placeholder-gray-600 focus:border-[#FFB400] focus:outline-none transition-all disabled:opacity-50"
+                    className="w-full bg-black border-gray-800 rounded-xl pl-12 pr-4 py-4 text-white placeholder-gray-600 focus:border-[#FFB400] focus:outline-none transition-all disabled:opacity-50"
                     required
                   />
                 </div>
@@ -128,7 +132,7 @@ const Reservation = () => {
                     onChange={handleChange}
                     maxLength={11}
                     disabled={submitted}
-                    className="w-full bg-black border border-gray-800 rounded-xl pl-12 pr-4 py-4 text-white placeholder-gray-600 focus:border-[#FFB400] focus:outline-none transition-all disabled:opacity-50"
+                    className="w-full bg-black border-gray-800 rounded-xl pl-12 pr-4 py-4 text-white placeholder-gray-600 focus:border-[#FFB400] focus:outline-none transition-all disabled:opacity-50"
                     required
                   />
                 </div>
@@ -145,7 +149,7 @@ const Reservation = () => {
                     min={today}
                     disabled={submitted}
                     onClick={(e) => e.target.showPicker()}
-                    className="w-full bg-black border border-gray-800 rounded-xl pl-12 pr-4 py-4 text-white focus:border-[#FFB400] focus:outline-none transition-all cursor-pointer [color-scheme:dark] [&::-webkit-calendar-picker-indicator]:hidden disabled:opacity-50"
+                    className="w-full bg-black border-gray-800 rounded-xl pl-12 pr-4 py-4 text-white focus:border-[#FFB400] focus:outline-none transition-all cursor-pointer [color-scheme:dark] [&::-webkit-calendar-picker-indicator]:hidden disabled:opacity-50"
                     required
                   />
                 </div>
@@ -156,7 +160,7 @@ const Reservation = () => {
                     value={formData.time}
                     onChange={handleChange}
                     disabled={submitted}
-                    className="w-full bg-black border border-gray-800 rounded-xl pl-12 pr-4 py-4 text-white focus:border-[#FFB400] focus:outline-none transition-all appearance-none cursor-pointer disabled:opacity-50"
+                    className="w-full bg-black border-gray-800 rounded-xl pl-12 pr-4 py-4 text-white focus:border-[#FFB400] focus:outline-none transition-all appearance-none cursor-pointer disabled:opacity-50"
                     required
                   >
                     <option value="" disabled>Time</option>
@@ -173,7 +177,7 @@ const Reservation = () => {
                     value={formData.guests}
                     onChange={handleChange}
                     disabled={submitted}
-                    className="w-full bg-black border border-gray-800 rounded-xl pl-12 pr-4 py-4 text-white focus:border-[#FFB400] focus:outline-none transition-all appearance-none cursor-pointer disabled:opacity-50"
+                    className="w-full bg-black border-gray-800 rounded-xl pl-12 pr-4 py-4 text-white focus:border-[#FFB400] focus:outline-none transition-all appearance-none cursor-pointer disabled:opacity-50"
                   >
                     <option value="1">1 Guest</option>
                     <option value="2">2 Guests</option>
@@ -188,7 +192,7 @@ const Reservation = () => {
                 value={formData.occasion}
                 onChange={handleChange}
                 disabled={submitted}
-                className="w-full bg-black border border-gray-800 rounded-xl px-4 py-4 text-white focus:border-[#FFB400] focus:outline-none transition-all appearance-none cursor-pointer disabled:opacity-50"
+                className="w-full bg-black border-gray-800 rounded-xl px-4 py-4 text-white focus:border-[#FFB400] focus:outline-none transition-all appearance-none cursor-pointer disabled:opacity-50"
               >
                 <option value="Casual Dining">Casual Dining</option>
                 <option value="Birthday Celebration">Birthday Celebration</option>
@@ -210,9 +214,9 @@ const Reservation = () => {
           {/* Right - Live Preview */}
           <div className="relative bg-[url('https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=800&q=80')] bg-cover bg-center">
             <div className="absolute inset-0 bg-black/80 backdrop-blur-sm"></div>
-            <div className="relative z-10 h-full p-8 md:p-12 flex flex-col justify-between">
+            <div className="relative z-10 h-full p-8 md:p-12 flex-col justify-between">
               <div className="text-right"></div>
-              <div className="bg-gray-900/60 backdrop-blur-xl border border-gray-800 rounded-2xl p-8">
+              <div className="bg-gray-900/60 backdrop-blur-xl border-gray-800 rounded-2xl p-8">
                 <p className="text-gray-500 text-xs font-mono mb-2">RESERVATION FOR</p>
                 <h3 className="text-3xl font-bold text-white mb-6">
                   {formData.name || 'Your Name'}
