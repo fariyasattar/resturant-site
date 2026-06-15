@@ -7,7 +7,7 @@ import toast, { Toaster } from 'react-hot-toast';
 // Reservation.jsx me
 const API_URL = import.meta.env.VITE_API_URL || 'https://resturant-site-production.up.railway.app';
 
-const res = await axios.post(`${API_URL}/api/bookings`, dataToSend);
+
 
 const servicesData = [
   {
@@ -95,7 +95,7 @@ export default function Services() {
     img.onload = () => setImgLoaded(true);
   }, [activeIdx]);
 
-  const API_URL = import.meta.env.VITE_API_URL; // YE LINE ADD KARO
+ 
 
 const onSubmit = async (data) => {
     setIsSubmitting(true);
