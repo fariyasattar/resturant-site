@@ -95,7 +95,9 @@ export default function Services() {
     img.onload = () => setImgLoaded(true);
   }, [activeIdx]);
 
-  const onSubmit = async (data) => {
+  const API_URL = import.meta.env.VITE_API_URL; // YE LINE ADD KARO
+
+const onSubmit = async (data) => {
     setIsSubmitting(true);
     try {
       const response = await axios.post(`${API_URL}/api/bookings`, {
