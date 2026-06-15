@@ -9,7 +9,7 @@ const app = express()
 
 // 1. Middleware
 app.use(cors({ 
-  origin: "https://resturant-site-beryl.vercel.app",
+  origin: "*",
   credentials: true 
 }))
 app.use(express.json())
